@@ -40,7 +40,7 @@
           </div>
 
           <div class="inner cover">
-          <!--  <h1 class="cover-heading">Letter Counter</h1> -->
+            <h1 class="cover-heading">Letter Counter</h1>
             <p class="lead">This app counts the letters in a pharse.  Simple enough.</p>
 
 
@@ -49,16 +49,16 @@
                   <form class="inner form-signin">
 
                     <label for="inputEmail" class="sr-only">Phrase:</label>
-                    <input type="email" id="inputEmail" class="form-control" placeholder="Count the letters in this sentence" required autofocus>
+                    <input type="text" id="inputText" class="form-control" placeholder="Count the letters in this sentence" required autofocus>
                   </form>
 
 
             <p class="lead">
-              <a href="#" class="btn btn-lg btn-secondary">Calculate</a>
+              <a href="#" id="button" class="btn btn-lg btn-secondary" onclick="myFunction()">Calculate</a>
             </p>
 
 
-            <p id="results">A: 1 <br>B: 2 </p>
+            <p id="results"></p>
 
 
           </div>
@@ -78,6 +78,58 @@
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
+
+    <script>
+    function myFunction() {
+      var inText = document.getElementById("inputText").value;
+      inText = inText.toUpperCase();
+      var letters='ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+
+      var output;
+      var resultCount=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+
+      for (i = 0; i < inText.length; i++) {
+        for (h=0;h<26;h++){
+
+          console.log(letters.charAt(h) + " is equal to " + inText.charAt(i));
+          if (letters.charAt(h) == inText.charAt(i)) {
+
+            console.log("True!");
+
+            resultCount[h]++;
+
+            break;
+
+          } else {
+
+            console.log("False!");
+
+          }
+        }
+
+      }
+      document.getElementById("results").innerHTML = " ";
+
+      for (i=0;i<26;i++) {
+        if (resultCount[i] != 0) {
+          output = "<br>" + letters.charAt(i) + ": " + resultCount[i] ;
+          document.getElementById("results").innerHTML += output;
+        }
+
+      }
+
+
+
+    }
+
+    document.getElementById("inputText")
+    .addEventListener("keyup", function(event) {
+      event.preventDefault();
+      if (event.keyCode == 13) {
+        document.getElementById("button").click();
+      }
+    });
+    </script>
     <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
     <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
