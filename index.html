@@ -31,7 +31,7 @@
 
           <div class="masthead clearfix">
             <div class="inner">
-              <h3 class="masthead-brand">Letter Counter</h3>
+              <h1 class="masthead-brand">Letter Counter</h1>
               <nav class="nav nav-masthead">
                 <a class="nav-link active" href="#">Home</a>
                 <a class="nav-link" href="mailto:kabirkuriyan@gmail.com">Contact</a>
@@ -40,20 +40,19 @@
           </div>
 
           <div class="inner cover">
-            <h1 class="cover-heading">Letter Counter</h1>
-            <p class="lead">This app counts the letters in a pharse.  Simple enough.</p>
 
-
+            <p class="lead">This app counts the letters in a pharse.  Type in the phrase, and the magic will happen! You can also choose to ignore capitalization.</p>
 
 
                   <form class="inner form-signin">
 
                     <label for="inputEmail" class="sr-only">Phrase:</label>
-                    <input type="text"  id="inputText" class="form-control" placeholder="Count the letters in this sentence" required autofocus onchange="myFunction()">
+                    <input type="text"  id="inputText" class="form-control" placeholder="Type phrase to count letters in here..." required autofocus onchange="myFunction()">
                   </form>
 
 
             <p class="lead">
+              
               <a href="#" id="button" class="btn btn-lg btn-secondary" onclick="myFunction()">Calculate</a>
             </p>
 
@@ -82,43 +81,24 @@
     <script>
     function myFunction() {
       var inText = document.getElementById("inputText").value;
-      inText = inText.toUpperCase();
-      var letters='ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+      //  inText = inText.toUpperCase();
+      var counts = {};
+      var ch, count;
 
-      var output;
-      var resultCount=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
-
-      for (i = 0; i < inText.length; i++) {
-        for (h=0;h<26;h++){
-
-          console.log(letters.charAt(h) + " is equal to " + inText.charAt(i));
-          if (letters.charAt(h) == inText.charAt(i)) {
-
-            console.log("True!");
-
-            resultCount[h]++;
-
-            break;
-
-          } else {
-
-            console.log("False!");
-
-          }
-        }
-
+      for (i = 0; i < inText.length; ++i) {
+        ch = inText.charAt(i);
+        count = counts[ch]
+        counts[ch] = count ? count + 1 : 1;
       }
+
       document.getElementById("results").innerHTML = " ";
 
-      for (i=0;i<26;i++) {
-        if (resultCount[i] != 0) {
-          output = "<br>" + letters.charAt(i) + ": " + resultCount[i] ;
-          document.getElementById("results").innerHTML += output;
-        }
 
+      for (ch in counts) {
+        console.log(ch + " count: " + counts[ch]);
+        var output = ch + " : " + counts[ch] + "<br>";
+        document.getElementById("results").innerHTML += output;
       }
-
-
 
     }
 
