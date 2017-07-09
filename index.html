@@ -47,12 +47,15 @@
                   <form class="inner form-signin">
 
                     <label for="inputEmail" class="sr-only">Phrase:</label>
+
                     <input type="text"  id="inputText" class="form-control" placeholder="Type phrase to count letters in here..." required autofocus onchange="myFunction()">
+
                   </form>
 
+                    <label><input type="checkbox" name="checkbox" id="capital" onclick="myFunction()" value="value">Ignore Capitalization</label>
 
             <p class="lead">
-              
+
               <a href="#" id="button" class="btn btn-lg btn-secondary" onclick="myFunction()">Calculate</a>
             </p>
 
@@ -81,7 +84,12 @@
     <script>
     function myFunction() {
       var inText = document.getElementById("inputText").value;
-      //  inText = inText.toUpperCase();
+
+      if(document.getElementById('capital').checked) {
+         inText = inText.toUpperCase();
+      }
+
+
       var counts = {};
       var ch, count;
 
